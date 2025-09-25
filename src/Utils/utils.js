@@ -4,4 +4,14 @@ function getIncidents(edges, id) {
     verticesIncidents.push(...incidentes);
     return verticesIncidents;
 }
-export { getIncidents };
+function createTree(vertex, father) {
+    let nodes = [];
+    let links = [];
+    nodes.push({ id: vertex, name: `Node ${vertex}` });
+    father.forEach((e, i) => {
+        nodes.push({ id: i, name: `Node ${i}` });
+        links.push({ source: e, target: i });
+    });
+    return { nodes, links };
+}
+export { getIncidents, createTree };

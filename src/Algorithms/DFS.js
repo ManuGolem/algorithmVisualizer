@@ -1,4 +1,4 @@
-import { getIncidents } from "../Utils/utils";
+import { getIncidents, createTree } from "../Utils/utils";
 let explored = [];
 let V;
 let E;
@@ -8,7 +8,8 @@ function DFSInit(graph, vertex) {
     E = graph.links;
     explored = new Array(V.length).fill(false);
     DFS(vertex);
-    console.log(explored, father);
+    const treeGraph = createTree(vertex, father);
+    return treeGraph;
 }
 function DFS(u) {
     explored[u] = true;

@@ -6,6 +6,8 @@
 * {
     font-family: "MappleMono";
     outline: none;
+    padding: 0px;
+    margin: 0px;
 }
 
 .header {
@@ -14,9 +16,23 @@
     }
 }
 
+body {
+    max-height: 100vh;
+}
+
 .mainPage {
-    canvas {
-        height: 800px;
-        width: 800px;
+    .grafos {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            border-radius: 1rem;
+            border: 2px solid black;
+        }
     }
 }
