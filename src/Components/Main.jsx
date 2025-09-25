@@ -4,7 +4,6 @@ import { DFSInit } from "../Algorithms/DFS";
 import { useState } from "react";
 export function Main() {
     const [tree, setTree] = useState();
-
     let data = {
         nodes: [
             { id: 0, name: "Node 0" },
@@ -24,15 +23,14 @@ export function Main() {
             { source: 2, target: 6 },
             { source: 3, target: 4 },
             { source: 3, target: 7 },
+            { source: 2, target: 7 },
+            { source: 7, target: 6 },
+            { source: 5, target: 6 },
         ],
     };
-
-    function dfsCallback() {
-        setTree(DFSInit(data, 2));
-    }
     return (
         <main className="mainPage">
-            <Buttons callback={dfsCallback} />
+            <Buttons setTree={setTree} graph={data} />
             <div className="grafos">
                 <article className="container">
                     <h1>Graph</h1>
@@ -40,7 +38,7 @@ export function Main() {
                 </article>
                 {tree && tree.nodes && (
                     <article className="container">
-                        <h1>Tree of DFS</h1>
+                        <h1>Tree of graph</h1>
                         <ForceGraph2D graphData={tree} width={300} height={400} nodeLabel="name" nodeAutoColorBy="id" />
                     </article>
                 )}
