@@ -4,6 +4,7 @@ import cytoscape from "cytoscape";
 export function Main() {
     const [tree, setTree] = useState();
     const cyRef = useRef(null);
+    const cyInstanceRef = useRef(null);
     const cyTreeRef = useRef(null);
     const data = [
         {
@@ -21,7 +22,6 @@ export function Main() {
             data: { id: "d" },
         },
         {
-            // edge ab
             data: { id: "ab", source: "a", target: "b" },
         },
         {
@@ -36,7 +36,7 @@ export function Main() {
     ];
     useEffect(() => {
         if (!cyRef.current) return;
-        var cy = cytoscape({
+        cyInstanceRef.current = cytoscape({
             container: cyRef.current,
             elements: data,
             style: [
@@ -51,7 +51,7 @@ export function Main() {
                 {
                     selector: "edge",
                     style: {
-                        width: 3,
+                        width: 1,
                         "line-color": "#ccc",
                         "target-arrow-color": "#ccc",
                         "target-arrow-shape": "none",
@@ -60,20 +60,22 @@ export function Main() {
                 },
             ],
 
-            layout: {
-                name: "grid",
-                rows: 2,
-            },
+            layout: { name: "breadthfirst", directed: true, padding: 10, direction: "leftward" },
         });
 
-        return () => cy.destroy();
+        return () => cyInstanceRef.current?.destroy();
     }, []);
     useEffect(() => {
+        if (cyInstanceRef.current) {
+            cyInstanceRef.current.resize();
+            cyInstanceRef.current.fit();
+        }
+
         if (!tree || !cyTreeRef.current) return;
 
         const cyTree = cytoscape({
             container: cyTreeRef.current,
-            elements: tree, // <-- tu estado tree tiene que ser el array de nodos+edges
+            elements: tree,
             style: [
                 {
                     selector: "node",
@@ -88,7 +90,7 @@ export function Main() {
                         width: 2,
                         "line-color": "#aaa",
                         "target-arrow-color": "#aaa",
-                        "target-arrow-shape": "none", // para grafo no dirigido
+                        "target-arrow-shape": "none",
                         "curve-style": "bezier",
                     },
                 },
@@ -109,7 +111,7 @@ export function Main() {
                 {tree && (
                     <article className="container">
                         <h1>Tree of graph</h1>
-                        <div id="cy-tree" ref={cyTreeRef} className="graph "></div>
+                        <div id="cy-tree" ref={cyTreeRef} className="graph " />
                     </article>
                 )}
             </div>
