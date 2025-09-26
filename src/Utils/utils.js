@@ -1,17 +1,24 @@
 function getIncidents(edges, id) {
-    const verticesIncidents = edges.filter((obj) => obj.target.id === id).map((nodo) => nodo.source.id);
-    const incidentes = edges.filter((e) => e.source.id === id).map((e) => e.target.id);
-    verticesIncidents.push(...incidentes);
+    const verticesIncidents = [];
+    edges.forEach((obj) => {
+        const data = obj.data;
+        if (data.source === id) {
+            verticesIncidents.push(obj.data.target);
+        } else if (data.target === id) {
+            verticesIncidents.push(obj.data.source);
+        }
+    });
     return verticesIncidents;
 }
 function createTree(vertex, father) {
-    let nodes = [];
-    let links = [];
-    nodes.push({ id: vertex, name: `Node ${vertex}` });
-    father.forEach((e, i) => {
-        nodes.push({ id: i, name: `Node ${i}` });
-        links.push({ source: e, target: i });
+    let tree = [];
+    //Push the root
+    tree.push({ data: { id: vertex } });
+    Object.entries(father).forEach(([key, value]) => {
+        tree.push({ data: { id: key } });
+        tree.push({ data: { id: key.concat(value), source: value, target: key } });
     });
-    return { nodes, links };
+    console.log(tree);
+    return tree;
 }
 export { getIncidents, createTree };

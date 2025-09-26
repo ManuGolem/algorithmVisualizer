@@ -3,10 +3,10 @@ import { BFS } from "../Algorithms/BFS";
 
 export function Buttons({ setTree, graph }) {
     function dfsCallback() {
-        setTree(DFSInit(graph, 2));
+        setTree(DFSInit(graph, "a"));
     }
     function bfsCallback() {
-        setTree(BFS(graph, 0));
+        setTree(BFS(graph, "a"));
     }
     return (
         <article>

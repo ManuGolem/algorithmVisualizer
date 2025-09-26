@@ -1,11 +1,11 @@
 import { getIncidents, createTree } from "../Utils/utils";
-let discover = [];
+let discover = {};
 let V;
 let E;
-let father = [];
+let father = {};
 function BFS(graph, vertex) {
-    V = graph.nodes;
-    E = graph.links;
+    V = graph.filter((e) => e.data.source == undefined);
+    E = graph.filter((e) => e.data.source != undefined);
     let L = [[vertex]];
     let i = 0;
     discover = new Array(V.length).fill(false);
@@ -24,7 +24,6 @@ function BFS(graph, vertex) {
         });
         i++;
     }
-    console.log(father);
     const treeBFS = createTree(vertex, father);
     return treeBFS;
 }

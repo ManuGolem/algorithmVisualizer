@@ -1,45 +1,115 @@
-import ForceGraph2D from "react-force-graph-2d";
 import { Buttons } from "./Buttons";
-import { DFSInit } from "../Algorithms/DFS";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import cytoscape from "cytoscape";
 export function Main() {
     const [tree, setTree] = useState();
-    let data = {
-        nodes: [
-            { id: 0, name: "Node 0" },
-            { id: 1, name: "Node 1" },
-            { id: 2, name: "Node 2" },
-            { id: 3, name: "Node 3" },
-            { id: 4, name: "Node 4" },
-            { id: 5, name: "Node 5" },
-            { id: 6, name: "Node 6" },
-            { id: 7, name: "Node 7" },
-        ],
-        links: [
-            { source: 0, target: 1 },
-            { source: 1, target: 3 },
-            { source: 1, target: 4 },
-            { source: 2, target: 5 },
-            { source: 2, target: 6 },
-            { source: 3, target: 4 },
-            { source: 3, target: 7 },
-            { source: 2, target: 7 },
-            { source: 7, target: 6 },
-            { source: 5, target: 6 },
-        ],
-    };
+    const cyRef = useRef(null);
+    const cyTreeRef = useRef(null);
+    const data = [
+        {
+            // node a
+            data: { id: "a" },
+        },
+        {
+            // node b
+            data: { id: "b" },
+        },
+        {
+            data: { id: "c" },
+        },
+        {
+            data: { id: "d" },
+        },
+        {
+            // edge ab
+            data: { id: "ab", source: "a", target: "b" },
+        },
+        {
+            data: { id: "ac", source: "c", target: "a" },
+        },
+        {
+            data: { id: "cb", source: "c", target: "b" },
+        },
+        {
+            data: { id: "bd", source: "b", target: "d" },
+        },
+    ];
+    useEffect(() => {
+        if (!cyRef.current) return;
+        var cy = cytoscape({
+            container: cyRef.current,
+            elements: data,
+            style: [
+                {
+                    selector: "node",
+                    style: {
+                        "background-color": "#666",
+                        label: "data(id)",
+                    },
+                },
+
+                {
+                    selector: "edge",
+                    style: {
+                        width: 3,
+                        "line-color": "#ccc",
+                        "target-arrow-color": "#ccc",
+                        "target-arrow-shape": "none",
+                        "curve-style": "bezier",
+                    },
+                },
+            ],
+
+            layout: {
+                name: "grid",
+                rows: 2,
+            },
+        });
+
+        return () => cy.destroy();
+    }, []);
+    useEffect(() => {
+        if (!tree || !cyTreeRef.current) return;
+
+        const cyTree = cytoscape({
+            container: cyTreeRef.current,
+            elements: tree, // <-- tu estado tree tiene que ser el array de nodos+edges
+            style: [
+                {
+                    selector: "node",
+                    style: {
+                        "background-color": "#0074D9",
+                        label: "data(id)",
+                    },
+                },
+                {
+                    selector: "edge",
+                    style: {
+                        width: 2,
+                        "line-color": "#aaa",
+                        "target-arrow-color": "#aaa",
+                        "target-arrow-shape": "none", // para grafo no dirigido
+                        "curve-style": "bezier",
+                    },
+                },
+            ],
+            layout: { name: "breadthfirst", directed: true, padding: 10 },
+        });
+
+        return () => cyTree.destroy();
+    }, [tree]);
     return (
         <main className="mainPage">
             <Buttons setTree={setTree} graph={data} />
             <div className="grafos">
                 <article className="container">
                     <h1>Graph</h1>
-                    <ForceGraph2D graphData={data} width={300} height={400} nodeLabel="name" nodeAutoColorBy="id" />
+                    <div id="cy" ref={cyRef} className="graph" />
                 </article>
-                {tree && tree.nodes && (
+                {tree && (
                     <article className="container">
                         <h1>Tree of graph</h1>
-                        <ForceGraph2D graphData={tree} width={300} height={400} nodeLabel="name" nodeAutoColorBy="id" />
+                        <div id="cy-tree" ref={cyTreeRef} className="graph "></div>
                     </article>
                 )}
             </div>

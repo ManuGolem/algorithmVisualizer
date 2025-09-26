@@ -1,11 +1,11 @@
 import { getIncidents, createTree } from "../Utils/utils";
-let explored = [];
+let explored = {};
 let V;
 let E;
-let father = [];
+let father = {};
 function DFSInit(graph, vertex) {
-    V = graph.nodes;
-    E = graph.links;
+    V = graph.filter((e) => e.data.source == undefined);
+    E = graph.filter((e) => e.data.source != undefined);
     explored = new Array(V.length).fill(false);
     DFS(vertex);
     const treeGraph = createTree(vertex, father);
