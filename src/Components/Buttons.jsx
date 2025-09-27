@@ -9,7 +9,7 @@ export function Buttons({ setTree, graph }) {
         setTree(BFS(graph, "a"));
     }
     return (
-        <article>
+        <article className="buttonsAlgorithm">
             <button onClick={() => dfsCallback()}>DFS</button>
             <button onClick={() => bfsCallback()}>BFS</button>
         </article>

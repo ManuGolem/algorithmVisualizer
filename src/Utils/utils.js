@@ -12,13 +12,12 @@ function getIncidents(edges, id) {
 }
 function createTree(vertex, father) {
     let tree = [];
-    //Push the root
+    //Push the root first
     tree.push({ data: { id: vertex } });
     Object.entries(father).forEach(([key, value]) => {
         tree.push({ data: { id: key } });
         tree.push({ data: { id: key.concat(value), source: value, target: key } });
     });
-    console.log(tree);
     return tree;
 }
 export { getIncidents, createTree };

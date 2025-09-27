@@ -42,6 +42,30 @@ body {
 }
 
 .mainPage {
+    .buttonsAlgorithm {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+
+        gap: 1rem;
+
+        button {
+            border: none;
+            border-radius: 0.5rem;
+            background-color: var(--inch-worm-6);
+            font-size: 20px;
+            font-weight: bold;
+            padding-inline: 1rem;
+            padding-block: 0.6rem;
+
+            &:hover {
+                scale: 1.1;
+                background-color: var(--inch-worm-9);
+                cursor: pointer;
+            }
+        }
+    }
+
     .grafos {
         display: flex;
         justify-content: center;
