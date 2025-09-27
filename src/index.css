@@ -1,67 +1,83 @@
-:root {
-    font-family: "MappleMono";
-    src: url("/MappleMono.woff2");
-    --inch-worm-1: #d9ff75;
-    --inch-worm-2: #c8f600;
-    --inch-worm-3: #b8e200;
-    --inch-worm-4: #afd700;
-    --inch-worm-5: #a3c900;
-    --inch-worm-6: #96b900;
-    --inch-worm-7: #88a800;
-    --inch-worm-8: #799500;
-    --inch-worm-9: #698300;
-    --inch-worm-10: #5a7000;
-    --inch-worm-11: #526600;
-    --inch-worm-12: #4a5d00;
-    --inch-worm-13: #425300;
-    --inch-worm-14: #3b4a00;
-}
+@import url("https://fonts.googleapis.com/css2?family=Joti+One&display=swap");
 
 * {
-    font-family: "MappleMono";
+    font-family: "Joti One", serif;
+    font-weight: 400;
+    font-style: normal;
     outline: none;
     padding: 0px;
     margin: 0px;
 }
 
+body {
+    background: linear-gradient(white, #29ea80);
+    background-repeat: no-repeat;
+}
+
 .header {
-    background-color: var(--inch-worm-9);
     padding: 1rem;
+    padding-inline: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
 
     h1 {
-        color: white;
+        color: black;
         text-align: center;
         font-weight: bold;
         font-size: 42px;
+        padding: 0;
+    }
+
+    .navButtons {
+        display: flex;
+        outline: none;
+        gap: 2rem;
+
+        li {
+            list-style-type: none;
+        }
+
+        button {
+            color: black;
+            font-size: 26px;
+            border: none;
+            background-color: transparent;
+            padding-inline: 0.5rem;
+
+            &:hover {
+                scale: 1.1;
+                cursor: pointer;
+                background-color: #c4fed4;
+                border-radius: 8px;
+                transition: ease-in 0.1s;
+            }
+        }
     }
 }
 
-body {
-    max-height: 100vh;
-    background-color: var(--inch-worm-1);
-}
-
 .mainPage {
+    height: 100vh;
+
     .buttonsAlgorithm {
         display: flex;
         justify-content: center;
         padding: 1rem;
-
         gap: 1rem;
 
         button {
             border: none;
-            border-radius: 0.5rem;
-            background-color: var(--inch-worm-6);
             font-size: 20px;
             font-weight: bold;
-            padding-inline: 1rem;
-            padding-block: 0.6rem;
+            padding-inline: 0.5rem;
+            background-color: transparent;
 
             &:hover {
                 scale: 1.1;
-                background-color: var(--inch-worm-9);
                 cursor: pointer;
+                background-color: #68fe9f;
+                border-radius: 8px;
+                transition: ease-in 0.1s;
             }
         }
     }

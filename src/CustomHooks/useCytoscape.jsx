@@ -14,15 +14,15 @@ export function useCytoscape(containerRef, elements) {
                 {
                     selector: "node",
                     style: {
-                        "background-color": "#666",
+                        "background-color": "white",
                         label: "data(id)",
                     },
                 },
                 {
                     selector: "edge",
                     style: {
-                        width: 1,
-                        "line-color": "#ccc",
+                        width: 3,
+                        "line-color": "black",
                         "target-arrow-color": "#ccc",
                         "target-arrow-shape": "none",
                         "curve-style": "bezier",
