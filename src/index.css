@@ -58,6 +58,21 @@ body {
 
 .mainPage {
     height: 100vh;
+    text-align: center;
+
+    h1 {
+        font-size: 40px;
+        padding: 10rem;
+        padding-inline: 20rem;
+    }
+
+    span {
+        color: #03f;
+    }
+}
+
+.graphPage {
+    height: 100vh;
 
     .buttonsAlgorithm {
         display: flex;
