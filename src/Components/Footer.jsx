@@ -1,3 +1,7 @@
 export function Footer() {
-    return null;
+    return (
+        <footer className="footer">
+            <a href="https://manugolem.github.io/Portfolio/">Manuel Carreras</a>
+        </footer>
+    );
 }

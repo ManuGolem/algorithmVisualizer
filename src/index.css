@@ -12,6 +12,13 @@
 body {
     background: linear-gradient(white, #29ea80);
     background-repeat: no-repeat;
+    height: 100vh;
+
+    #root {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
 }
 
 .header {
@@ -57,22 +64,7 @@ body {
 }
 
 .mainPage {
-    height: 100vh;
-    text-align: center;
-
-    h1 {
-        font-size: 40px;
-        padding: 10rem;
-        padding-inline: 20rem;
-    }
-
-    span {
-        color: #03f;
-    }
-}
-
-.graphPage {
-    height: 100vh;
+    flex: 1;
 
     .buttonsAlgorithm {
         display: flex;
@@ -119,6 +111,21 @@ body {
             h1 {
                 text-align: center;
             }
+        }
+    }
+}
+
+.footer {
+    text-align: center;
+
+    a {
+        font-size: 20px;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            scale: 1.1;
+            color: #03f;
         }
     }
 }
